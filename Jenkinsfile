@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Git Checkout'){
             steps{
-                git branch: 'main' url: 'https://github.com/sanket7133/DevOps-Project.git'
+                git branch: 'main', url: 'https://github.com/sanket7133/DevOps-Project.git'
             }
         }
 
