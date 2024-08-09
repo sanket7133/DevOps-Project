@@ -56,10 +56,22 @@ pipeline {
             }
         }
 
-        stage('Deploy to ECS') {
+        // stage('Deploy to ECS') {
+        //     steps {
+        //         sh """aws ecs update-service --cluster ${CLUSTER_NAME} --service ${CLUSTER_SERVICE} --force-new-deployment --task-definition \$(aws ecs describe-services --cluster ${CLUSTER_NAME} --services ${CLUSTER_SERVICE} --query 'services[0].taskDefinition' --output text) --container-definitions "[{\"name\":\"${IMAGE_NAME}\",\"image\":\"${ECR_URL}:${IMAGE_TAG}\"}]" """
+        //     }
+        // }
+           stage('Create new task definition') {
             steps {
-                sh """aws ecs update-service --cluster ${CLUSTER_NAME} --service ${CLUSTER_SERVICE} --force-new-deployment --task-definition \$(aws ecs describe-services --cluster ${CLUSTER_NAME} --services ${CLUSTER_SERVICE} --query 'services[0].taskDefinition' --output text) --container-definitions "[{\"name\":\"${IMAGE_NAME}\",\"image\":\"${ECR_URL}:${IMAGE_TAG}\"}]" """
+                sh """aws ecs create-task-definition --family ${TASK_DEFINITION_NAME} --container-definitions "[{\"name\":\"${IMAGE_NAME}\",\"image\":\"${ECR_URL}:${IMAGE_TAG}\"}]" --output text"""
             }
         }
+
+        stage('Update service to use new task definition') {
+            steps {
+                sh """aws ecs update-service --cluster ${CLUSTER_NAME} --service ${CLUSTER_SERVICE} --force-new-deployment --task-definition \$(aws ecs describe-task-definition --task-definition ${TASK_DEFINITION_NAME} --query 'taskDefinitionArn' --output text)"""
+            }
+        }
+
     }
 }
