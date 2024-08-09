@@ -6,7 +6,7 @@ pipeline {
             AWS_REGION='ap-south-1'
             IMAGE_NAME='ice-cream'
             IMAGE_TAG='latest'
-            CLUSTER_NAME='ice-cream_cluster'
+            CLUSTER_NAME='ice-cream-cluster'
             CLUSTER_SERVICE="ice-cream-service"
             TASK_DEFINITION_NAME="ice-cream_family"
             ECR_URL= "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_NAME}"
