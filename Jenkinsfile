@@ -8,7 +8,7 @@ pipeline {
             IMAGE_TAG='latest'
             CLUSTER_NAME='ice-cream-cluster'
             CLUSTER_SERVICE="ice-cream-service"
-            TASK_DEFINITION_NAME="ice-cream_fam"
+            TASK_DEFINITION_NAME="ice-cream-fam"
             ECR_URL= "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_NAME}"
             DESIRED_COUNT="2"
     }
