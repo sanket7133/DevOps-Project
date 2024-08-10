@@ -8,7 +8,7 @@ pipeline {
             IMAGE_TAG='latest'
             CLUSTER_NAME='ice-cream-cluster'
             CLUSTER_SERVICE="ice-cream-service"
-            TASK_DEFINITION_NAME="ice-cream_family"
+            TASK_DEFINITION_NAME="ice-cream_fam"
             ECR_URL= "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_NAME}"
             DESIRED_COUNT="2"
     }
@@ -72,7 +72,7 @@ pipeline {
         //         sh """aws ecs update-service --cluster ${CLUSTER_NAME} --service ${CLUSTER_SERVICE} --force-new-deployment --task-definition \$(aws ecs describe-task-definition --task-definition ${TASK_DEFINITION_NAME} --query 'taskDefinitionArn' --output text)"""
         //     }
         // }
-        
+
         stage('Ecr Deploy'){
             steps{
                   script {
