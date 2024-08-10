@@ -2,7 +2,7 @@
     "family": FAMILY,
     "containerDefinitions": [
         {
-            "image": "ECR_URL:BUILD_NUMBER",
+            "image": "REPOSITORY_URI:BUILD_NUMBER",
             "name": NAME,
 	    "essential": true,
             "portMappings": [
